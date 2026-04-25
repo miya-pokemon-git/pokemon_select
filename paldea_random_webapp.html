@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>パルデア抽選</title>
+  <meta name="theme-color" content="#2563eb" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="パルデア抽選" />
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --sub: #6b7280;
+      --border: #dbe2ea;
+      --accent: #2563eb;
+      --accent2: #1d4ed8;
+      --chip: #eef2ff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Yu Gothic", sans-serif;
+      background: linear-gradient(180deg, #eff6ff 0%, #f6f7fb 45%, #f6f7fb 100%);
+      color: var(--text);
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding: max(16px, env(safe-area-inset-top)) 14px max(16px, env(safe-area-inset-bottom)) 14px;
+      -webkit-text-size-adjust: 100%;
+      touch-action: manipulation;
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      background: rgba(255,255,255,.95);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 20px;
+      box-shadow: 0 16px 40px rgba(37,99,235,.14);
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: var(--accent);
+      color: #fff;
+      font-size: 24px;
+      box-shadow: 0 10px 20px rgba(37,99,235,.28);
+      flex: 0 0 auto;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: -0.02em;
+    }
+
+    p {
+      margin: 0;
+      color: var(--sub);
+      line-height: 1.6;
+    }
+
+    .options {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: #f9fbff;
+    }
+
+    .options label {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      margin-top: 1px;
+      flex: 0 0 auto;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    button {
+      appearance: none;
+      -webkit-appearance: none;
+      border: none;
+      border-radius: 14px;
+      padding: 14px 18px;
+      min-height: 50px;
+      width: 100%;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    button:active { transform: scale(.98); }
+    button:disabled { opacity: .55; cursor: wait; }
+
+    .primary { background: var(--accent); color: #fff; }
+    .secondary { background: #e5e7eb; color: var(--text); }
+
+    .status {
+      margin-top: 14px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: #f8fafc;
+      color: var(--sub);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .result {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 14px;
+      background: #fbfdff;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .image-wrap {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      display: grid;
+      place-items: center;
+      background: #f1f5f9;
+      border-radius: 14px;
+      margin-bottom: 10px;
+    }
+
+    .pokemon-image {
+      width: 84%;
+      height: 84%;
+      object-fit: contain;
+    }
+
+    .skeleton {
+      width: 70%;
+      height: 70%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #e5e7eb, #f8fafc, #e5e7eb);
+      background-size: 200% 100%;
+      animation: shimmer 1.1s infinite linear;
+    }
+
+    @keyframes shimmer {
+      from { background-position: 200% 0; }
+      to { background-position: -200% 0; }
+    }
+
+    .label { font-size: 13px; color: var(--sub); margin-bottom: 4px; }
+    .number { font-size: 24px; font-weight: 900; }
+    .name { margin-top: 4px; font-size: 18px; font-weight: 900; line-height: 1.4; }
+
+    .info {
+      margin-top: 10px;
+      display: grid;
+      gap: 8px;
+      text-align: left;
+    }
+
+    .info-title {
+      font-size: 12px;
+      color: var(--sub);
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      background: var(--chip);
+      padding: 4px 9px;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.3;
+    }
+
+    .note {
+      margin-top: 18px;
+      font-size: 13px;
+      color: var(--sub);
+      line-height: 1.5;
+    }
+
+    @media (min-width: 641px) {
+      .controls { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 760px) {
+      .result { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 16px; border-radius: 18px; }
+      h1 { font-size: 24px; }
+      .result { grid-template-columns: 1fr; }
+      .name { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <div class="header">
+      <div class="icon">🎲</div>
+      <div>
+        <h1>パルデア抽選</h1>
+        <p>ポケモンSV パルデア図鑑から6体を重複なしで選出</p>
+      </div>
+    </div>
+
+    <div class="options">
+      <label>
+        <input type="checkbox" id="excludeSpecial" />
+        <span>伝説・準伝説・パラドックスを除外する</span>
+      </label>
+    </div>
+
+    <div class="controls">
+      <button class="primary" id="drawButton" disabled>読み込み中...</button>
+      <button class="secondary" id="copyButton">結果をコピー</button>
+    </div>
+
+    <div class="status" id="status">パルデア図鑑データを読み込み中です。</div>
+    <section class="result" id="result"></section>
+
+    <div class="note">
+      初回は通信が必要です。取得済みデータは端末に保存され、次回以降は速く表示されます。<br />
+      iPhoneではSafariで開き、共有ボタン → 「ホーム画面に追加」でアプリ風に使えます。
+    </div>
+  </main>
+
+  <script>
+    const PICK_COUNT = 6;
+    const PALDEA_DEX_URL = "https://pokeapi.co/api/v2/pokedex/paldea";
+    const DEX_CACHE_KEY = "paldea_dex_cache_v3";
+    const DETAIL_CACHE_KEY = "paldea_detail_cache_v3";
+
+    const EXCLUDED_NUMBERS = new Set([
+      376, 377, 378, 379, 380, 381, 382, 383, 384, 385, 386, 387,
+      393, 394, 395, 396,
+      397, 398,
+      399, 400
+    ]);
+
+    const TYPE_JA = {
+      normal: "ノーマル", fire: "ほのお", water: "みず", electric: "でんき", grass: "くさ", ice: "こおり",
+      fighting: "かくとう", poison: "どく", ground: "じめん", flying: "ひこう", psychic: "エスパー", bug: "むし",
+      rock: "いわ", ghost: "ゴースト", dragon: "ドラゴン", dark: "あく", steel: "はがね", fairy: "フェアリー"
+    };
+
+    const FORM_OVERRIDES = {
+      53: "wooper-paldea",
+      223: "tauros-paldea-combat-breed"
+    };
+
+    const resultEl = document.getElementById("result");
+    const drawButton = document.getElementById("drawButton");
+    const copyButton = document.getElementById("copyButton");
+    const statusEl = document.getElementById("status");
+    const excludeSpecialCheckbox = document.getElementById("excludeSpecial");
+
+    let paldeaEntries = [];
+    let detailCache = loadStorage(DETAIL_CACHE_KEY, {});
+
+    function setStatus(message) {
+      statusEl.textContent = message;
+    }
+
+    function loadStorage(key, fallback) {
+      try {
+        const raw = localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : fallback;
+      } catch (_) {
+        return fallback;
+      }
+    }
+
+    function saveStorage(key, value) {
+      try {
+        localStorage.setItem(key, JSON.stringify(value));
+      } catch (_) {}
+    }
+
+    async function fetchJson(url) {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("データ取得に失敗しました");
+      return res.json();
+    }
+
+    function getJapaneseName(names, fallback) {
+      const found = names.find(n => n.language.name === "ja-Hrkt") || names.find(n => n.language.name === "ja");
+      return found ? found.name : fallback;
+    }
+
+    async function loadPaldeaDex() {
+      const cached = loadStorage(DEX_CACHE_KEY, null);
+      if (Array.isArray(cached) && cached.length >= 400) {
+        paldeaEntries = cached;
+        return;
+      }
+
+      const data = await fetchJson(PALDEA_DEX_URL);
+      paldeaEntries = data.pokemon_entries
+        .filter(entry => entry.entry_number >= 1 && entry.entry_number <= 400)
+        .map(entry => ({
+          no: entry.entry_number,
+          speciesName: entry.pokemon_species.name,
+          speciesUrl: entry.pokemon_species.url
+        }))
+        .sort((a, b) => a.no - b.no);
+
+      saveStorage(DEX_CACHE_KEY, paldeaEntries);
+    }
+
+    function getCandidateEntries() {
+      return excludeSpecialCheckbox.checked
+        ? paldeaEntries.filter(entry => !EXCLUDED_NUMBERS.has(entry.no))
+        : paldeaEntries;
+    }
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    function drawEntries() {
+      return shuffle([...getCandidateEntries()]).slice(0, PICK_COUNT).sort((a, b) => a.no - b.no);
+    }
+
+    function getPokemonApiName(entry, speciesData) {
+      if (FORM_OVERRIDES[entry.no]) return FORM_OVERRIDES[entry.no];
+      const defaultVariety = speciesData.varieties.find(v => v.is_default) || speciesData.varieties[0];
+      return defaultVariety.pokemon.name;
+    }
+
+    async function loadAbilityName(item) {
+      const abilityData = await fetchJson(item.ability.url);
+      const name = getJapaneseName(abilityData.names, item.ability.name);
+      return item.is_hidden ? `${name}（隠れ）` : name;
+    }
+
+    async function loadDetail(entry) {
+      const key = String(entry.no);
+      if (detailCache[key]) return detailCache[key];
+
+      const speciesData = await fetchJson(entry.speciesUrl);
+      const pokemonApiName = getPokemonApiName(entry, speciesData);
+      const pokemonData = await fetchJson(`https://pokeapi.co/api/v2/pokemon/${pokemonApiName}`);
+
+      const detail = {
+        no: entry.no,
+        name: getJapaneseName(speciesData.names, entry.speciesName),
+        types: pokemonData.types
+          .sort((a, b) => a.slot - b.slot)
+          .map(t => TYPE_JA[t.type.name] || t.type.name),
+        abilities: await Promise.all(
+          pokemonData.abilities
+            .sort((a, b) => a.slot - b.slot)
+            .map(loadAbilityName)
+        ),
+        image:
+          pokemonData.sprites?.other?.["official-artwork"]?.front_default ||
+          pokemonData.sprites?.other?.home?.front_default ||
+          pokemonData.sprites?.front_default ||
+          ""
+      };
+
+      detailCache[key] = detail;
+      saveStorage(DETAIL_CACHE_KEY, detailCache);
+      return detail;
+    }
+
+    function renderLoading(entries) {
+      resultEl.innerHTML = entries.map((entry, index) => `
+        <div class="card">
+          <div class="image-wrap"><div class="skeleton"></div></div>
+          <div class="label">${index + 1}体目</div>
+          <div class="number">No.${entry.no}</div>
+          <div class="name">取得中...</div>
+        </div>
+      `).join("");
+    }
+
+    function render(details) {
+      resultEl.innerHTML = details.map((pokemon, index) => `
+        <div class="card" data-copy="No.${pokemon.no} ${pokemon.name} / ${pokemon.types.join("・")} / ${pokemon.abilities.join("・")}">
+          <div class="image-wrap">
+            ${pokemon.image ? `<img class="pokemon-image" src="${pokemon.image}" alt="${pokemon.name}" loading="eager" decoding="async" />` : "画像なし"}
+          </div>
+          <div class="label">${index + 1}体目</div>
+          <div class="number">No.${pokemon.no}</div>
+          <div class="name">${pokemon.name}</div>
+          <div class="info">
+            <div>
+              <div class="info-title">タイプ</div>
+              <div class="chips">${pokemon.types.map(type => `<span class="chip">${type}</span>`).join("")}</div>
+            </div>
+            <div>
+              <div class="info-title">特性</div>
+              <div class="chips">${pokemon.abilities.map(ability => `<span class="chip">${ability}</span>`).join("")}</div>
+            </div>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    async function drawAndRender() {
+      if (!paldeaEntries.length) return;
+
+      drawButton.disabled = true;
+      drawButton.textContent = "取得中...";
+
+      const entries = drawEntries();
+      const cachedCount = entries.filter(entry => detailCache[String(entry.no)]).length;
+      renderLoading(entries);
+      setStatus(cachedCount === entries.length ? "保存済みデータから表示中です。" : `取得中です。保存済み ${cachedCount}/6 件を利用します。`);
+
+      try {
+        const details = await Promise.all(entries.map(loadDetail));
+        render(details);
+        setStatus(cachedCount === entries.length ? "選出完了。通信なしで表示しました。" : "選出完了。取得データを保存しました。次回以降は速くなります。");
+      } catch (error) {
+        console.error(error);
+        setStatus("データ取得に失敗しました。通信環境を確認して、もう一度押してください。キャッシュ済みデータは利用できます。");
+      } finally {
+        drawButton.disabled = false;
+        drawButton.textContent = "6体を抽選";
+      }
+    }
+
+    function getCurrentResultsText() {
+      return Array.from(document.querySelectorAll(".card"))
+        .map(card => card.dataset.copy)
+        .filter(Boolean)
+        .join("\n");
+    }
+
+    copyButton.addEventListener("click", async () => {
+      const text = getCurrentResultsText();
+      if (!text) {
+        alert("先に抽選してください。");
+        return;
+      }
+
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          const textarea = document.createElement("textarea");
+          textarea.value = text;
+          textarea.setAttribute("readonly", "");
+          textarea.style.position = "fixed";
+          textarea.style.top = "-9999px";
+          document.body.appendChild(textarea);
+          textarea.focus();
+          textarea.select();
+          document.execCommand("copy");
+          document.body.removeChild(textarea);
+        }
+        alert(`結果をコピーしました。\n${text}`);
+      } catch (_) {
+        alert(`コピーできなかったため、手動でコピーしてください。\n${text}`);
+      }
+    });
+
+    drawButton.addEventListener("click", drawAndRender);
+    excludeSpecialCheckbox.addEventListener("change", () => {
+      if (paldeaEntries.length) drawAndRender();
+    });
+
+    (async function init() {
+      try {
+        await loadPaldeaDex();
+        drawButton.disabled = false;
+        drawButton.textContent = "6体を抽選";
+        setStatus(Object.keys(detailCache).length
+          ? `準備完了。保存済みデータ ${Object.keys(detailCache).length} 件を利用できます。`
+          : "準備完了。初回抽選時にデータを取得します。"
+        );
+      } catch (error) {
+        console.error(error);
+        drawButton.textContent = "読み込み失敗";
+        setStatus("パルデア図鑑データを取得できませんでした。インターネット接続を確認してください。HTMLをローカルで開く場合は、ブラウザ制限により通信できないことがあります。");
+      }
+    })();
+  </script>
+</body>
+</html>
