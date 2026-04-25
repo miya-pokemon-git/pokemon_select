@@ -11,12 +11,10 @@
   <style>
     :root {
       --bg: #f6f7fb;
-      --card: #ffffff;
       --text: #1f2937;
       --sub: #6b7280;
       --border: #dbe2ea;
       --accent: #2563eb;
-      --accent2: #1d4ed8;
       --chip: #eef2ff;
     }
 
@@ -37,44 +35,24 @@
     .container {
       max-width: 980px;
       margin: 0 auto;
-      background: rgba(255,255,255,.95);
+      background: rgba(255,255,255,.96);
       border: 1px solid var(--border);
       border-radius: 24px;
       padding: 20px;
       box-shadow: 0 16px 40px rgba(37,99,235,.14);
     }
 
-    .header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 8px;
-    }
-
+    .header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
     .icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 16px;
-      display: grid;
-      place-items: center;
-      background: var(--accent);
-      color: #fff;
-      font-size: 24px;
+      width: 48px; height: 48px; border-radius: 16px;
+      display: grid; place-items: center;
+      background: var(--accent); color: #fff; font-size: 24px;
       box-shadow: 0 10px 20px rgba(37,99,235,.28);
       flex: 0 0 auto;
     }
 
-    h1 {
-      margin: 0;
-      font-size: 28px;
-      letter-spacing: -0.02em;
-    }
-
-    p {
-      margin: 0;
-      color: var(--sub);
-      line-height: 1.6;
-    }
+    h1 { margin: 0; font-size: 28px; letter-spacing: -0.02em; }
+    p { margin: 0; color: var(--sub); line-height: 1.6; }
 
     .options {
       margin-top: 18px;
@@ -82,9 +60,6 @@
       border: 1px solid var(--border);
       border-radius: 14px;
       background: #f9fbff;
-    }
-
-    .options {
       display: grid;
       gap: 12px;
     }
@@ -98,36 +73,20 @@
       line-height: 1.5;
     }
 
-    input[type="checkbox"] {
-      width: 20px;
-      height: 20px;
-      margin-top: 1px;
-      flex: 0 0 auto;
-    }
+    input[type="checkbox"] { width: 20px; height: 20px; margin-top: 1px; flex: 0 0 auto; }
 
-    .controls {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-      margin-top: 20px;
-    }
+    .controls { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 20px; }
 
     button {
-      appearance: none;
-      -webkit-appearance: none;
-      border: none;
-      border-radius: 14px;
-      padding: 14px 18px;
-      min-height: 50px;
-      width: 100%;
-      font-size: 16px;
-      font-weight: 800;
-      cursor: pointer;
+      appearance: none; -webkit-appearance: none;
+      border: none; border-radius: 14px;
+      padding: 14px 18px; min-height: 50px; width: 100%;
+      font-size: 16px; font-weight: 800; cursor: pointer;
+      font-family: inherit;
     }
 
     button:active { transform: scale(.98); }
     button:disabled { opacity: .55; cursor: wait; }
-
     .primary { background: var(--accent); color: #fff; }
     .secondary { background: #e5e7eb; color: var(--text); }
 
@@ -139,6 +98,7 @@
       color: var(--sub);
       font-size: 14px;
       line-height: 1.5;
+      white-space: pre-line;
     }
 
     .result {
@@ -158,85 +118,58 @@
     }
 
     .image-wrap {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      display: grid;
-      place-items: center;
-      background: #f1f5f9;
-      border-radius: 14px;
-      margin-bottom: 10px;
+      width: 100%; aspect-ratio: 1 / 1;
+      display: grid; place-items: center;
+      background: #f1f5f9; border-radius: 14px; margin-bottom: 10px;
     }
 
-    .pokemon-image {
-      width: 84%;
-      height: 84%;
-      object-fit: contain;
-    }
-
+    .pokemon-image { width: 84%; height: 84%; object-fit: contain; }
     .skeleton {
-      width: 70%;
-      height: 70%;
-      border-radius: 999px;
+      width: 70%; height: 70%; border-radius: 999px;
       background: linear-gradient(90deg, #e5e7eb, #f8fafc, #e5e7eb);
-      background-size: 200% 100%;
-      animation: shimmer 1.1s infinite linear;
+      background-size: 200% 100%; animation: shimmer 1.1s infinite linear;
     }
 
-    @keyframes shimmer {
-      from { background-position: 200% 0; }
-      to { background-position: -200% 0; }
-    }
+    @keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
 
     .label { font-size: 13px; color: var(--sub); margin-bottom: 4px; }
     .number { font-size: 24px; font-weight: 900; }
     .name { margin-top: 4px; font-size: 18px; font-weight: 900; line-height: 1.4; }
-
-    .info {
-      margin-top: 10px;
-      display: grid;
-      gap: 8px;
-      text-align: left;
-    }
-
-    .info-title {
-      font-size: 12px;
-      color: var(--sub);
-      font-weight: 800;
-      margin-bottom: 4px;
-    }
-
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
+    .info { margin-top: 10px; display: grid; gap: 8px; text-align: left; }
+    .info-title { font-size: 12px; color: var(--sub); font-weight: 800; margin-bottom: 4px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; }
 
     .chip {
-      display: inline-flex;
-      align-items: center;
-      border-radius: 999px;
-      background: var(--chip);
-      padding: 4px 9px;
-      font-size: 12px;
-      font-weight: 800;
-      line-height: 1.3;
+      display: inline-flex; align-items: center;
+      border-radius: 999px; background: var(--chip);
+      padding: 4px 9px; font-size: 12px; font-weight: 800; line-height: 1.3;
     }
 
-    .note {
-      margin-top: 18px;
-      font-size: 13px;
-      color: var(--sub);
-      line-height: 1.5;
+    .ability-chip {
+      border: none; width: auto; min-height: auto; cursor: pointer;
+      color: var(--text); font-family: inherit;
     }
 
-    @media (min-width: 641px) {
-      .controls { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .ability-popover {
+      margin-top: 10px; padding: 10px 12px;
+      border-radius: 12px; background: #fff7ed;
+      border: 1px solid #fed7aa; color: #7c2d12;
+      font-size: 13px; font-weight: 700; line-height: 1.6; text-align: left;
+      position: relative;
     }
 
-    @media (max-width: 760px) {
-      .result { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .ability-popover::before {
+      content: ""; position: absolute; top: -7px; left: 18px;
+      width: 12px; height: 12px; background: #fff7ed;
+      border-left: 1px solid #fed7aa; border-top: 1px solid #fed7aa;
+      transform: rotate(45deg);
     }
 
+    .ability-popover-title { margin-bottom: 4px; font-size: 12px; color: #9a3412; }
+    .note { margin-top: 18px; font-size: 13px; color: var(--sub); line-height: 1.5; }
+
+    @media (min-width: 641px) { .controls { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 760px) { .result { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
     @media (max-width: 480px) {
       .container { padding: 16px; border-radius: 18px; }
       h1 { font-size: 24px; }
@@ -261,7 +194,7 @@
         <span>伝説・準伝説・パラドックスを除外する</span>
       </label>
       <label>
-        <input type="checkbox" id="evolvedOnly" />
+        <input type="checkbox" id="finalOnly" />
         <span>最終進化系のみ</span>
       </label>
     </div>
@@ -275,17 +208,17 @@
     <section class="result" id="result"></section>
 
     <div class="note">
-      初回は通信が必要です。ポケモン詳細・進化チェーン・最終進化判定は端末に保存され、次回以降は速く表示されます。<br />
+      初回は通信が必要です。取得済みデータは端末に保存され、次回以降は速く表示されます。<br />
     </div>
   </main>
 
   <script>
     const PICK_COUNT = 6;
     const PALDEA_DEX_URL = "https://pokeapi.co/api/v2/pokedex/paldea";
-    const DEX_CACHE_KEY = "paldea_dex_cache_v3";
-    const DETAIL_CACHE_KEY = "paldea_detail_cache_v3";
-    const EVOLUTION_CACHE_KEY = "paldea_final_evolution_cache_v2";
-    const CHAIN_CACHE_KEY = "paldea_chain_cache_v1";
+    const DEX_CACHE_KEY = "paldea_dex_cache_v5";
+    const DETAIL_CACHE_KEY = "paldea_detail_cache_v5";
+    const FINAL_CACHE_KEY = "paldea_final_cache_v5";
+    const CHAIN_CACHE_KEY = "paldea_chain_cache_v5";
 
     const EXCLUDED_NUMBERS = new Set([
       376, 377, 378, 379, 380, 381, 382, 383, 384, 385, 386, 387,
@@ -310,13 +243,13 @@
     const copyButton = document.getElementById("copyButton");
     const statusEl = document.getElementById("status");
     const excludeSpecialCheckbox = document.getElementById("excludeSpecial");
-    const evolvedOnlyCheckbox = document.getElementById("evolvedOnly");
+    const finalOnlyCheckbox = document.getElementById("finalOnly");
 
     let paldeaEntries = [];
     let detailCache = loadStorage(DETAIL_CACHE_KEY, {});
-    let evolutionCache = loadStorage(EVOLUTION_CACHE_KEY, {});
+    let finalCache = loadStorage(FINAL_CACHE_KEY, {});
     let chainCache = loadStorage(CHAIN_CACHE_KEY, {});
-    const pendingJsonRequests = new Map();
+    const pendingRequests = new Map();
 
     function setStatus(message) {
       statusEl.textContent = message;
@@ -338,24 +271,37 @@
     }
 
     async function fetchJson(url) {
-      if (pendingJsonRequests.has(url)) {
-        return pendingJsonRequests.get(url);
-      }
+      if (pendingRequests.has(url)) return pendingRequests.get(url);
 
-      const request = fetch(url)
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 15000);
+
+      const request = fetch(url, { signal: controller.signal })
         .then(res => {
           if (!res.ok) throw new Error("データ取得に失敗しました");
           return res.json();
         })
-        .finally(() => pendingJsonRequests.delete(url));
+        .finally(() => {
+          clearTimeout(timer);
+          pendingRequests.delete(url);
+        });
 
-      pendingJsonRequests.set(url, request);
+      pendingRequests.set(url, request);
       return request;
     }
 
     function getJapaneseName(names, fallback) {
       const found = names.find(n => n.language.name === "ja-Hrkt") || names.find(n => n.language.name === "ja");
       return found ? found.name : fallback;
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
     }
 
     async function loadPaldeaDex() {
@@ -378,91 +324,10 @@
       saveStorage(DEX_CACHE_KEY, paldeaEntries);
     }
 
-    function getBaseCandidateEntries() {
+    function getBaseCandidates() {
       return excludeSpecialCheckbox.checked
         ? paldeaEntries.filter(entry => !EXCLUDED_NUMBERS.has(entry.no))
         : paldeaEntries;
-    }
-
-    function findEvolutionNode(chain, speciesName) {
-      if (chain.species?.name === speciesName) return chain;
-
-      for (const next of chain.evolves_to || []) {
-        const found = findEvolutionNode(next, speciesName);
-        if (found) return found;
-      }
-
-      return null;
-    }
-
-    function listSpeciesInChain(chain, result = []) {
-      if (chain.species?.name) result.push(chain.species.name);
-      for (const next of chain.evolves_to || []) {
-        listSpeciesInChain(next, result);
-      }
-      return result;
-    }
-
-    async function loadSpeciesData(entry) {
-      return fetchJson(entry.speciesUrl);
-    }
-
-    async function loadEvolutionChain(chainUrl) {
-      if (chainCache[chainUrl]) return chainCache[chainUrl];
-
-      const chainData = await fetchJson(chainUrl);
-      chainCache[chainUrl] = chainData;
-      saveStorage(CHAIN_CACHE_KEY, chainCache);
-      return chainData;
-    }
-
-    async function ensureFinalEvolutionInfo(entry) {
-      const key = String(entry.no);
-      if (typeof evolutionCache[key] === "boolean") return evolutionCache[key];
-
-      const speciesData = await loadSpeciesData(entry);
-      const chainUrl = speciesData.evolution_chain?.url;
-
-      if (!chainUrl) {
-        evolutionCache[key] = true;
-        saveStorage(EVOLUTION_CACHE_KEY, evolutionCache);
-        return true;
-      }
-
-      const chainData = await loadEvolutionChain(chainUrl);
-      const node = findEvolutionNode(chainData.chain, speciesData.name);
-      const isFinal = Boolean(node) && (!node.evolves_to || node.evolves_to.length === 0);
-
-      // 同じ進化チェーン上のポケモンは、可能な範囲で一括判定して保存する
-      const speciesNames = new Set(listSpeciesInChain(chainData.chain));
-      for (const candidate of paldeaEntries) {
-        if (speciesNames.has(candidate.speciesName) && typeof evolutionCache[String(candidate.no)] !== "boolean") {
-          const candidateNode = findEvolutionNode(chainData.chain, candidate.speciesName);
-          evolutionCache[String(candidate.no)] = Boolean(candidateNode) && (!candidateNode.evolves_to || candidateNode.evolves_to.length === 0);
-        }
-      }
-
-      evolutionCache[key] = isFinal;
-      saveStorage(EVOLUTION_CACHE_KEY, evolutionCache);
-      return isFinal;
-    }
-
-    async function getCandidateEntries() {
-      const baseCandidates = getBaseCandidateEntries();
-
-      if (!evolvedOnlyCheckbox.checked) {
-        return baseCandidates;
-      }
-
-      const cached = baseCandidates.filter(entry => typeof evolutionCache[String(entry.no)] === "boolean").length;
-      setStatus(`最終進化系を判定中です。保存済み ${cached}/${baseCandidates.length} 件を利用します。`);
-
-      const flags = await Promise.all(baseCandidates.map(async entry => ({
-        entry,
-        isFinal: await ensureFinalEvolutionInfo(entry)
-      })));
-
-      return flags.filter(item => item.isFinal).map(item => item.entry);
     }
 
     function shuffle(array) {
@@ -473,12 +338,84 @@
       return array;
     }
 
-    async function drawEntries() {
-      const candidates = await getCandidateEntries();
-      if (candidates.length < PICK_COUNT) {
-        throw new Error("抽選対象が不足しています。");
+    function findEvolutionNode(chain, speciesName) {
+      if (chain.species && chain.species.name === speciesName) return chain;
+      for (const next of chain.evolves_to || []) {
+        const found = findEvolutionNode(next, speciesName);
+        if (found) return found;
       }
-      return shuffle([...candidates]).slice(0, PICK_COUNT).sort((a, b) => a.no - b.no);
+      return null;
+    }
+
+    function saveFinalInfoFromChain(chainData) {
+      const stack = [chainData.chain];
+      while (stack.length) {
+        const node = stack.pop();
+        const name = node.species?.name;
+        if (name) {
+          const entry = paldeaEntries.find(item => item.speciesName === name);
+          if (entry) finalCache[String(entry.no)] = !(node.evolves_to && node.evolves_to.length);
+        }
+        for (const next of node.evolves_to || []) stack.push(next);
+      }
+      saveStorage(FINAL_CACHE_KEY, finalCache);
+    }
+
+    async function isFinalEvolution(entry) {
+      const key = String(entry.no);
+      if (typeof finalCache[key] === "boolean") return finalCache[key];
+
+      const speciesData = await fetchJson(entry.speciesUrl);
+      const chainUrl = speciesData.evolution_chain?.url;
+      if (!chainUrl) {
+        finalCache[key] = true;
+        saveStorage(FINAL_CACHE_KEY, finalCache);
+        return true;
+      }
+
+      let chainData = chainCache[chainUrl];
+      if (!chainData) {
+        chainData = await fetchJson(chainUrl);
+        chainCache[chainUrl] = chainData;
+        saveStorage(CHAIN_CACHE_KEY, chainCache);
+      }
+
+      saveFinalInfoFromChain(chainData);
+
+      if (typeof finalCache[key] === "boolean") return finalCache[key];
+
+      const node = findEvolutionNode(chainData.chain, speciesData.name);
+      const isFinal = Boolean(node) && !(node.evolves_to && node.evolves_to.length);
+      finalCache[key] = isFinal;
+      saveStorage(FINAL_CACHE_KEY, finalCache);
+      return isFinal;
+    }
+
+    async function drawEntries() {
+      const base = shuffle([...getBaseCandidates()]);
+
+      if (!finalOnlyCheckbox.checked) {
+        return base.slice(0, PICK_COUNT).sort((a, b) => a.no - b.no);
+      }
+
+      const selected = [];
+      let checked = 0;
+
+      for (const entry of base) {
+        if (selected.length >= PICK_COUNT) break;
+        checked++;
+        if (checked === 1 || checked % 8 === 0) {
+          setStatus(`最終進化系を確認中です。候補確認 ${checked} 件 / 選出 ${selected.length}/6`);
+        }
+        try {
+          if (await isFinalEvolution(entry)) selected.push(entry);
+        } catch (e) {
+          console.warn("最終進化判定をスキップ", entry, e);
+        }
+      }
+
+      if (selected.length < PICK_COUNT) throw new Error("抽選対象が不足しています。通信環境を確認してください。");
+      return selected.sort((a, b) => a.no - b.no);
     }
 
     function getPokemonApiName(entry, speciesData) {
@@ -487,10 +424,21 @@
       return defaultVariety.pokemon.name;
     }
 
-    async function loadAbilityName(item) {
+    function getAbilityDescription(abilityData) {
+      const jaFlavor = abilityData.flavor_text_entries?.find(entry => entry.language.name === "ja-Hrkt")
+        || abilityData.flavor_text_entries?.find(entry => entry.language.name === "ja");
+      const enFlavor = abilityData.flavor_text_entries?.find(entry => entry.language.name === "en");
+      const text = jaFlavor?.flavor_text || enFlavor?.flavor_text || "説明を取得できませんでした。";
+      return text.replace(/[\n\f]/g, " ");
+    }
+
+    async function loadAbilityInfo(item) {
       const abilityData = await fetchJson(item.ability.url);
-      const name = getJapaneseName(abilityData.names, item.ability.name);
-      return item.is_hidden ? `${name}（隠れ）` : name;
+      const baseName = getJapaneseName(abilityData.names, item.ability.name);
+      return {
+        name: item.is_hidden ? `${baseName}（隠れ）` : baseName,
+        description: getAbilityDescription(abilityData)
+      };
     }
 
     async function loadDetail(entry) {
@@ -504,19 +452,9 @@
       const detail = {
         no: entry.no,
         name: getJapaneseName(speciesData.names, entry.speciesName),
-        types: pokemonData.types
-          .sort((a, b) => a.slot - b.slot)
-          .map(t => TYPE_JA[t.type.name] || t.type.name),
-        abilities: await Promise.all(
-          pokemonData.abilities
-            .sort((a, b) => a.slot - b.slot)
-            .map(loadAbilityName)
-        ),
-        image:
-          pokemonData.sprites?.other?.["official-artwork"]?.front_default ||
-          pokemonData.sprites?.other?.home?.front_default ||
-          pokemonData.sprites?.front_default ||
-          ""
+        types: pokemonData.types.sort((a, b) => a.slot - b.slot).map(t => TYPE_JA[t.type.name] || t.type.name),
+        abilities: await Promise.all(pokemonData.abilities.sort((a, b) => a.slot - b.slot).map(loadAbilityInfo)),
+        image: pokemonData.sprites?.other?.["official-artwork"]?.front_default || pokemonData.sprites?.other?.home?.front_default || pokemonData.sprites?.front_default || ""
       };
 
       detailCache[key] = detail;
@@ -535,27 +473,42 @@
       `).join("");
     }
 
+    function normalizeAbility(ability) {
+      return typeof ability === "string" ? { name: ability, description: "説明は再取得後に表示されます。" } : ability;
+    }
+
     function render(details) {
-      resultEl.innerHTML = details.map((pokemon, index) => `
-        <div class="card" data-copy="No.${pokemon.no} ${pokemon.name} / ${pokemon.types.join("・")} / ${pokemon.abilities.join("・")}">
-          <div class="image-wrap">
-            ${pokemon.image ? `<img class="pokemon-image" src="${pokemon.image}" alt="${pokemon.name}" loading="eager" decoding="async" />` : "画像なし"}
-          </div>
-          <div class="label">${index + 1}体目</div>
-          <div class="number">No.${pokemon.no}</div>
-          <div class="name">${pokemon.name}</div>
-          <div class="info">
-            <div>
-              <div class="info-title">タイプ</div>
-              <div class="chips">${pokemon.types.map(type => `<span class="chip">${type}</span>`).join("")}</div>
+      resultEl.innerHTML = details.map((pokemon, index) => {
+        const abilities = pokemon.abilities.map(normalizeAbility);
+        const abilityNames = abilities.map(ability => ability.name);
+        return `
+          <div class="card" data-copy="No.${pokemon.no} ${escapeHtml(pokemon.name)} / ${escapeHtml(pokemon.types.join("・"))} / ${escapeHtml(abilityNames.join("・"))}">
+            <div class="image-wrap">
+              ${pokemon.image ? `<img class="pokemon-image" src="${pokemon.image}" alt="${escapeHtml(pokemon.name)}" loading="eager" decoding="async" />` : "画像なし"}
             </div>
-            <div>
-              <div class="info-title">特性</div>
-              <div class="chips">${pokemon.abilities.map(ability => `<span class="chip">${ability}</span>`).join("")}</div>
+            <div class="label">${index + 1}体目</div>
+            <div class="number">No.${pokemon.no}</div>
+            <div class="name">${escapeHtml(pokemon.name)}</div>
+            <div class="info">
+              <div>
+                <div class="info-title">タイプ</div>
+                <div class="chips">${pokemon.types.map(type => `<span class="chip">${escapeHtml(type)}</span>`).join("")}</div>
+              </div>
+              <div>
+                <div class="info-title">特性</div>
+                <div class="chips">
+                  ${abilities.map(ability => `
+                    <button class="chip ability-chip" type="button" data-ability-name="${escapeHtml(ability.name)}" data-ability-description="${escapeHtml(ability.description)}">
+                      ${escapeHtml(ability.name)}
+                    </button>
+                  `).join("")}
+                </div>
+                <div class="ability-popover" hidden></div>
+              </div>
             </div>
           </div>
-        </div>
-      `).join("");
+        `;
+      }).join("");
     }
 
     async function drawAndRender() {
@@ -563,19 +516,20 @@
 
       drawButton.disabled = true;
       drawButton.textContent = "取得中...";
-
-      const entries = await drawEntries();
-      const cachedCount = entries.filter(entry => detailCache[String(entry.no)]).length;
-      renderLoading(entries);
-      setStatus(cachedCount === entries.length ? "保存済みデータから表示中です。" : `取得中です。保存済み ${cachedCount}/6 件を利用します。`);
+      resultEl.innerHTML = "";
 
       try {
+        const entries = await drawEntries();
+        const cachedCount = entries.filter(entry => detailCache[String(entry.no)]).length;
+        renderLoading(entries);
+        setStatus(cachedCount === entries.length ? "保存済みデータから表示中です。" : `詳細取得中です。保存済み ${cachedCount}/6 件を利用します。`);
+
         const details = await Promise.all(entries.map(loadDetail));
         render(details);
         setStatus(cachedCount === entries.length ? "選出完了。通信なしで表示しました。" : "選出完了。取得データを保存しました。次回以降は速くなります。");
       } catch (error) {
         console.error(error);
-        setStatus("データ取得に失敗しました。通信環境を確認して、もう一度押してください。キャッシュ済みデータは利用できます。");
+        setStatus("読み込みに失敗しました。\n通信環境を確認するか、ページを再読み込みしてください。\nGitHub Pagesを更新した直後は、URL末尾に ?v=5 を付けると反映されやすいです。");
       } finally {
         drawButton.disabled = false;
         drawButton.textContent = "6体を抽選";
@@ -617,14 +571,33 @@
       }
     });
 
-    drawButton.addEventListener("click", drawAndRender);
-    excludeSpecialCheckbox.addEventListener("change", () => {
-      if (paldeaEntries.length) drawAndRender();
+    resultEl.addEventListener("click", event => {
+      const button = event.target.closest(".ability-chip");
+      if (!button) return;
+
+      const card = button.closest(".card");
+      const popover = card.querySelector(".ability-popover");
+      const title = button.dataset.abilityName;
+      const description = button.dataset.abilityDescription;
+      const alreadyOpen = !popover.hidden && popover.dataset.currentAbility === title;
+
+      if (alreadyOpen) {
+        popover.hidden = true;
+        popover.dataset.currentAbility = "";
+        return;
+      }
+
+      popover.innerHTML = `
+        <div class="ability-popover-title">${escapeHtml(title)}</div>
+        <div>${escapeHtml(description)}</div>
+      `;
+      popover.dataset.currentAbility = title;
+      popover.hidden = false;
     });
 
-    evolvedOnlyCheckbox.addEventListener("change", () => {
-      if (paldeaEntries.length) drawAndRender();
-    });
+    drawButton.addEventListener("click", drawAndRender);
+    excludeSpecialCheckbox.addEventListener("change", () => { if (paldeaEntries.length) drawAndRender(); });
+    finalOnlyCheckbox.addEventListener("change", () => { if (paldeaEntries.length) drawAndRender(); });
 
     (async function init() {
       try {
@@ -632,13 +605,13 @@
         drawButton.disabled = false;
         drawButton.textContent = "6体を抽選";
         setStatus(Object.keys(detailCache).length
-          ? `準備完了。ポケモン詳細 ${Object.keys(detailCache).length} 件 / 最終進化判定 ${Object.keys(evolutionCache).length} 件を保存済みです。`
+          ? `準備完了。詳細 ${Object.keys(detailCache).length} 件 / 最終進化判定 ${Object.keys(finalCache).length} 件を保存済みです。`
           : "準備完了。初回抽選時にデータを取得します。"
         );
       } catch (error) {
         console.error(error);
         drawButton.textContent = "読み込み失敗";
-        setStatus("パルデア図鑑データを取得できませんでした。インターネット接続を確認してください。HTMLをローカルで開く場合は、ブラウザ制限により通信できないことがあります。");
+        setStatus("パルデア図鑑データを取得できませんでした。\nGitHub PagesのURLで開いているか、通信環境を確認してください。\n更新直後はURL末尾に ?v=5 を付けてください。");
       }
     })();
   </script>
